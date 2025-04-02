@@ -1,22 +1,30 @@
 package com.example.demo.Model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 import java.util.Set;
 
 @Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Estudiante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long codigo;
 
     @Column
+    @NonNull
     private String nombre;
 
     @Column
+    @NonNull
     private String telefono;
 
+    @NonNull
     @OneToMany(
             mappedBy = "estudiante",
             cascade = CascadeType.ALL,
@@ -24,6 +32,7 @@ public class Estudiante {
     )
     private List<Calificacion> calificaciones;
 
+    @NonNull
     @ManyToMany()
     @JoinTable(
             name = "estudiante_curso",
@@ -32,67 +41,8 @@ public class Estudiante {
     )
     private Set<Curso> cursos;
 
+    @NonNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "direccion_id", referencedColumnName = "id")
     private Direccion direccion;
-
-    public Estudiante() {
-    }
-
-    public Estudiante(long codigo, String nombre, String telefono, List<Calificacion> calificaciones, Set<Curso> cursos, Direccion direccion) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.calificaciones = calificaciones;
-        this.cursos = cursos;
-        this.direccion = direccion;
-    }
-
-    public long getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public List<Calificacion> getCalificaciones() {
-        return calificaciones;
-    }
-
-    public void setCalificaciones(List<Calificacion> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
-
-    public Set<Curso> getCursos() {
-        return cursos;
-    }
-
-    public void setCursos(Set<Curso> cursos) {
-        this.cursos = cursos;
-    }
-
-    public Direccion getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
-    }
 }
