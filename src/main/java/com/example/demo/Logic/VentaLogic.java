@@ -5,6 +5,7 @@ import com.example.demo.Model.Venta;
 import com.example.demo.Repository.IEmpleadoRepository;
 import com.example.demo.Repository.IVentaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,26 +15,52 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class VentaLogic {
 
+    @Autowired
     private IVentaRepository ventaRepository;
 
     public Venta create(Venta data) {
-        return this.ventaRepository.save(data);
+        try {
+            return this.ventaRepository.save(data);
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error creando la venta: " + ex.getMessage());
+        }
+
+        return null;
     }
 
     public List<Venta> getAll() {
-        return this.ventaRepository.findAll();
+        try {
+            return this.ventaRepository.findAll();
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error obteniendo las ventas: " + ex.getMessage());
+        }
+
+        return null;
     }
 
     public Venta getById(Long id) {
-        Optional<Venta> venta = this.ventaRepository.findById(id);
-        return venta.orElse(null);
+        try {
+            Optional<Venta> venta = this.ventaRepository.findById(id);
+
+            if (venta.isPresent())
+                return venta.get();
+
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error obteniendo la venta con id " + id + ": " + ex.getMessage());
+        }
+
+        return null;
     }
 
     public void delete(Long id) {
-        Optional<Venta> venta = this.ventaRepository.findById(id);
+        try {
+            Optional<Venta> venta = this.ventaRepository.findById(id);
 
-        if (venta.isEmpty()) return;
+            if (venta.isPresent())
+                this.ventaRepository.deleteById(id);
 
-        this.ventaRepository.deleteById(id);
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error eliminando la venta con id " + id + ": " + ex.getMessage());
+        }
     }
 }

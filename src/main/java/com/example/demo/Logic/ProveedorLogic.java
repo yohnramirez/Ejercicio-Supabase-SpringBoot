@@ -18,40 +18,64 @@ public class ProveedorLogic {
         try {
             return this.proveedorRepository.save(data);
         } catch (Exception ex) {
-
+            System.out.println("Ocurrió un error creando el proveedor: " + ex.getMessage());
         }
 
         return null;
     }
 
     public List<Proveedor> getAll() {
-        return this.proveedorRepository.findAll();
+        try {
+            return this.proveedorRepository.findAll();
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error obteniendo los proveedores: " + ex.getMessage());
+        }
+
+        return null;
     }
 
     public Proveedor getById(Long id) {
-        Optional<Proveedor> proveedor = this.proveedorRepository.findById(id);
-        return proveedor.orElse(null);
+        try {
+            Optional<Proveedor> proveedor = this.proveedorRepository.findById(id);
+
+            if (proveedor.isPresent())
+                return proveedor.get();
+
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error obteniendo el proveedor con id " + id + ": " + ex.getMessage());
+        }
+
+        return null;
     }
 
     public void delete(Long id) {
-        Optional<Proveedor> proveedor = this.proveedorRepository.findById(id);
+        try {
+            Optional<Proveedor> proveedor = this.proveedorRepository.findById(id);
 
-        if (proveedor.isEmpty()) return;
+            if (proveedor.isPresent())
+                this.proveedorRepository.deleteById(id);
 
-        this.proveedorRepository.deleteById(id);
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error obteniendo el proveedor con id " + id + ": " + ex.getMessage());
+        }
     }
 
     public Proveedor update(Long id, Proveedor data) {
-        Optional<Proveedor> proveedor = this.proveedorRepository.findById(id);
+        try {
+            Optional<Proveedor> proveedor = this.proveedorRepository.findById(id);
 
-        if (proveedor.isPresent()) {
-            proveedor.get().setNombre(data.getNombre());
-            proveedor.get().setTelefono(data.getTelefono());
-            proveedor.get().setCorreo(data.getCorreo());
-            proveedor.get().setDireccion(data.getDireccion());
-            proveedor.get().setProductos(data.getProductos());
+            if (proveedor.isPresent()) {
+                proveedor.get().setNombre(data.getNombre());
+                proveedor.get().setTelefono(data.getTelefono());
+                proveedor.get().setCorreo(data.getCorreo());
+                proveedor.get().setDireccion(data.getDireccion());
+                proveedor.get().setProductos(data.getProductos());
 
-            return this.proveedorRepository.save(proveedor.get());
+                return this.proveedorRepository.save(proveedor.get());
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error actualizando el proveedor con id " + id + ": " + ex.getMessage());
         }
 
         return null;
