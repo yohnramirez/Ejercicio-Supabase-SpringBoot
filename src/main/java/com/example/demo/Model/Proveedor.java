@@ -2,17 +2,16 @@ package com.example.demo.Model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Curso {
+@Table(name = "proveedor")
+public class Proveedor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,18 +23,16 @@ public class Curso {
 
     @Column
     @NonNull
-    private String descripcion;
-
-    @NonNull
-    @ManyToMany(mappedBy = "cursos")
-    private Set<Estudiante> estudiantes;
+    private String telefono;
 
     @Column
     @NonNull
-    private boolean estado;
+    private String correo;
 
     @Column
     @NonNull
-    @CreationTimestamp
-    private LocalDateTime fechaCreacion;
+    private String direccion;
+
+    @OneToMany(mappedBy = "proveedor")
+    private List<Producto> productos;
 }

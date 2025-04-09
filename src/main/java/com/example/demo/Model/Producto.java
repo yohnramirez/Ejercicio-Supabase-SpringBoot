@@ -8,7 +8,8 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Direccion {
+@Table(name = "producto")
+public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,16 +17,21 @@ public class Direccion {
 
     @Column
     @NonNull
-    private String calle;
-
-    @Column(nullable = true)
-    private String carrera;
+    private String nombre;
 
     @Column
     @NonNull
-    private String ciudad;
+    private String descripcion;
 
+    @Column
     @NonNull
-    @OneToOne(mappedBy = "direccion")
-    private Estudiante estudiante;
+    private double precio;
+
+    @Column
+    @NonNull
+    private Integer stock;
+
+    @ManyToOne
+    @JoinColumn(name = "id_proveedor")
+    private Proveedor proveedor;
 }

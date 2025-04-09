@@ -3,27 +3,31 @@ package com.example.demo.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Calificacion {
-
+@Table(name = "empleado")
+public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column
     @NonNull
-    private String materia;
+    private String nombre;
 
     @Column
     @NonNull
-    private double nota;
+    private String cargo;
 
+    @Column
     @NonNull
-    @ManyToOne
-    @JoinColumn(name = "estudiante_id")
-    private Estudiante estudiante;
+    private String telefono;
+
+    @OneToMany(mappedBy = "empleado")
+    private List<Venta> ventas;
 }
