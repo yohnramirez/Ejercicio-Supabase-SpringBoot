@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,5 +36,6 @@ public class Cliente {
     private String correo;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonBackReference(value = "cliente-ventas")
     private List<Venta> ventas;
 }

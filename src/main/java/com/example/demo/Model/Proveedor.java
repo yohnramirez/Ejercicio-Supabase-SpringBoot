@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,6 +34,7 @@ public class Proveedor {
     @NonNull
     private String direccion;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "proveedor")
     private List<Producto> productos;
 }

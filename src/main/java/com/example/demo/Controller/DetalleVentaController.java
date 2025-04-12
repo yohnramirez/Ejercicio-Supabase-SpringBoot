@@ -17,7 +17,7 @@ public class DetalleVentaController {
     private DetalleVentaLogic detalleVentaLogic;
 
     @PostMapping
-    public ResponseEntity<String> create(DetalleVenta data) {
+    public ResponseEntity<String> create(@RequestBody DetalleVenta data) {
 
         var result = this.detalleVentaLogic.create(data);
 
@@ -66,6 +66,18 @@ public class DetalleVentaController {
         var result = this.detalleVentaLogic.update(id, data);
 
         if (result == null) return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/byEmployeeAndCustomer")
+    public ResponseEntity<List<DetalleVenta>> findByEmployeeAndCustomer(@RequestParam Long idEmployee, @RequestParam Long idCustomer) {
+
+        if (idEmployee < 1 || idCustomer < 1) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+        var result = this.detalleVentaLogic.findByEmployeeAndCustomer(idEmployee, idCustomer);
+
+        if (result == null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

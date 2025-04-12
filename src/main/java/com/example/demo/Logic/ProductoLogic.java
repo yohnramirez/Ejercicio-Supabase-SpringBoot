@@ -4,6 +4,7 @@ import com.example.demo.Model.Empleado;
 import com.example.demo.Model.Producto;
 import com.example.demo.Repository.IProductoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductoLogic {
 
+    @Autowired
     private IProductoRepository productoRepository;
 
     public Producto create(Producto data) {
@@ -77,6 +79,17 @@ public class ProductoLogic {
 
         } catch (Exception ex) {
             System.out.println("Ocurrió un error actualizando el producto con id " + id + ": " + ex.getMessage());
+        }
+
+        return null;
+    }
+
+    public List<Producto> getBySupplierId(Long idSupplier) {
+        try {
+            return this.productoRepository.findByProveedorId(idSupplier);
+
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error los productos por proveedor: " + ex.getMessage());
         }
 
         return null;

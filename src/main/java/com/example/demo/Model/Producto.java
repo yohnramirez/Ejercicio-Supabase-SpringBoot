@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,5 +34,6 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "id_proveedor")
+    @JsonBackReference
     private Proveedor proveedor;
 }

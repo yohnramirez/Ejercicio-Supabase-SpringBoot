@@ -3,6 +3,7 @@ package com.example.demo.Logic;
 import com.example.demo.Model.DetalleVenta;
 import com.example.demo.Repository.IDetalleVentaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DetalleVentaLogic {
 
+    @Autowired
     private IDetalleVentaRepository detalleVentaRepository;
 
     public DetalleVenta create(DetalleVenta data) {
@@ -74,6 +76,16 @@ public class DetalleVentaLogic {
 
         } catch (Exception ex) {
             System.out.println("Ocurrió un error actualizando el detalle de venta con id " + id + ": " + ex.getMessage());
+        }
+
+        return null;
+    }
+
+    public List<DetalleVenta> findByEmployeeAndCustomer(Long idEmployee, Long idCustomer) {
+        try {
+            return this.detalleVentaRepository.findDetallesByEmpleadoAndCliente(idEmployee, idCustomer);
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error obteniendo los detalles por empleado y cliente: " + ex.getMessage());
         }
 
         return null;

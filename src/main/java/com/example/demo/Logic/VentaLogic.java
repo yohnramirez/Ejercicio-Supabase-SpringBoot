@@ -63,4 +63,24 @@ public class VentaLogic {
             System.out.println("Ocurrió un error eliminando la venta con id " + id + ": " + ex.getMessage());
         }
     }
+
+    public List<Venta> getByCustomerId(Long idCustomer) {
+        try {
+            return this.ventaRepository.findByClienteId(idCustomer);
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error obteniendo las ventas por cliente: " + ex.getMessage());
+        }
+
+        return null;
+    }
+
+    public List<Venta> getByEmployeeId(Long idEmployee) {
+        try {
+            return this.ventaRepository.findByEmpleadoId(idEmployee);
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error obteniendo las ventas por empleado: " + ex.getMessage());
+        }
+
+        return null;
+    }
 }

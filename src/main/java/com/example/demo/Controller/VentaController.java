@@ -59,4 +59,28 @@ public class VentaController {
 
         return new ResponseEntity<>("Venta con id " + id + " eliminado correctamente.", HttpStatus.OK);
     }
+
+    @GetMapping("/getByCustomer")
+    public ResponseEntity<List<Venta>> getByCustomer(@RequestParam Long idCustomer) {
+
+        if (idCustomer < 1) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+        var result = this.ventaLogic.getByCustomerId(idCustomer);
+
+        if (result == null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/getByEmployee")
+    public ResponseEntity<List<Venta>> getByEmployee(@RequestParam Long idEmployee) {
+
+        if (idEmployee < 1) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+        var result = this.ventaLogic.getByEmployeeId(idEmployee);
+
+        if (result == null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

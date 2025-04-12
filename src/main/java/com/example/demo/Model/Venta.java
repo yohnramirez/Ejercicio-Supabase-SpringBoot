@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,12 +28,15 @@ public class Venta {
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
+    @JsonManagedReference(value = "cliente-ventas")
     private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "id_empleado")
+    @JsonManagedReference(value = "empleado-ventas")
     private Empleado empleado;
 
     @OneToMany(mappedBy = "venta")
+    @JsonManagedReference(value = "venta-detalles")
     private List<DetalleVenta> ventas;
 }

@@ -71,4 +71,16 @@ public class ProductoController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @GetMapping("/getBySupplier")
+    public ResponseEntity<List<Producto>> getBySupplier(@RequestParam Long idSupplier) {
+
+        if (idSupplier < 1) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+        var result = this.productoLogic.getBySupplierId(idSupplier);
+
+        if (result == null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

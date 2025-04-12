@@ -3,6 +3,7 @@ package com.example.demo.Logic;
 import com.example.demo.Model.Proveedor;
 import com.example.demo.Repository.IProveedorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProveedorLogic {
 
+    @Autowired
     private IProveedorRepository proveedorRepository;
 
     public Proveedor create(Proveedor data) {
