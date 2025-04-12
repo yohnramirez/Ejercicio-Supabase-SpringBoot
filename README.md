@@ -9,7 +9,7 @@
 | `cargo`      | `string` | **Required**. Cargo del empleado |
 | `telefono`      | `string` | **Required**. Telefono del empleado |
 
-![img.png](img.png)
+![img.png](images/img.png)
 
 ### Crear cliente
 
@@ -23,7 +23,7 @@
 | `telefono`      | `string` | **Required**. Telefono del cliente |
 | `correo`      | `string` | **Required**. Correo del cliente |
 
-![img_1.png](img_1.png)
+![img_1.png](images/img_1.png)
 
 ### Crear proveedor
 
@@ -37,7 +37,7 @@
 | `telefono`      | `string` | **Required**. Telefono del proveedor |
 | `correo`      | `string` | **Required**. Correo del proveedor |
 
-![img_2.png](img_2.png)
+![img_2.png](images/img_2.png)
 
 ### Crear producto
 
@@ -52,7 +52,7 @@
 | `stock`      | `int` | **Required**. Stock |
 | `proveedor`      | `Proveedor` | **Required**. Referencia proveedor |
 
-![img_3.png](img_3.png)
+![img_3.png](images/img_3.png)
 
 ### Crear venta
 
@@ -64,7 +64,7 @@
 | `cliente`      | `Cliente` | **Required**. Referencia cliente |
 | `empleado`      | `Empleado` | **Required**. Referencia empleado |
 
-![img_4.png](img_4.png)
+![img_4.png](images/img_4.png)
 
 ### Crear detalle de venta
 
@@ -78,7 +78,7 @@
 | `producto`      | `Producto` | **Required**. Referencia producto |
 | `venta`      | `Venta` | **Required**. Referencia venta |
 
-![img_5.png](img_5.png)
+![img_5.png](images/img_5.png)
 
 ### Obtener los detalles de venta por cliente y empleado
 
@@ -88,11 +88,11 @@
 
 #### Repositorio Spring Boot
 
-![img_6.png](img_6.png)
+![img_6.png](images/img_6.png)
 
 #### Postman
 
-![img_7.png](img_7.png)
+![img_7.png](images/img_7.png)
 
 ### Obtener productos que ofrece un proveedor
 
@@ -102,11 +102,11 @@
 
 #### Repositorio Spring Boot
 
-![img_8.png](img_8.png)
+![img_8.png](images/img_8.png)
 
 #### Postman
 
-![img_9.png](img_9.png)
+![img_9.png](images/img_9.png)
 
 ### Obtener ventas por cliente
 
@@ -116,11 +116,11 @@
 
 #### Repositorio Spring Boot
 
-![img_10.png](img_10.png)
+![img_10.png](images/img_10.png)
 
 #### Postman
 
-![img_11.png](img_11.png)
+![img_11.png](images/img_11.png)
 
 ### Obtener ventas por empleado
 
@@ -130,11 +130,11 @@
 
 #### Repositorio Spring Boot
 
-![img_10.png](img_10.png)
+![img_10.png](images/img_10.png)
 
 #### Postman
 
-![img_12.png](img_12.png)
+![img_12.png](images/img_12.png)
 
 
 
